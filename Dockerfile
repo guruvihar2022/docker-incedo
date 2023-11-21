@@ -1,5 +1,11 @@
 FROM openjdk:8u151-jdk-alpine3.7
+  
 EXPOSE 8080
-ARG JAR_FILE=target/*.jar
-COPY ${JAR_FILE} HelloChandra.jar
-ENTRYPOINT [ "java", "-jar", "/HelloChandra.jar" ]
+ 
+ENV APP_HOME /usr/src/app
+
+COPY target/HelloChandra-0.0.1-SNAPSHOT.jar $APP_HOME/app.jar
+
+WORKDIR $APP_HOME
+
+ENTRYPOINT exec java -jar app.jar 
